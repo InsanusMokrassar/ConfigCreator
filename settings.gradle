@@ -1,7 +1,11 @@
-rootProject.name = 'project_name'
+rootProject.name = 'config_creator'
 
 String[] includes = [
-    ":lib"
+    ":lib",
+
+    ":features:common:common",
+    ":features:common:client",
+    ":features:common:server",
 ]
 
 

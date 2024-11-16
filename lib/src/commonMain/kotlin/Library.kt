@@ -1,4 +1,4 @@
-package project_group.project_name.lib
+package dev.inmo.config_creator.lib
 
 class Library {
     fun someLibraryMethod(): Boolean {
