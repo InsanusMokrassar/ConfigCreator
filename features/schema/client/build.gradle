@@ -1,0 +1,20 @@
+plugins {
+    id "org.jetbrains.kotlin.multiplatform"
+    id "org.jetbrains.kotlin.plugin.serialization"
+    id "com.android.library"
+    alias(libs.plugins.kotlin.jb.compose)
+    alias(libs.plugins.jb.compose)
+}
+
+apply from: "$mppProjectWithSerialization"
+
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                api project(":config_creator.features.schema.common")
+                api project(":config_creator.features.common.client")
+            }
+        }
+    }
+}
