@@ -7,6 +7,9 @@ jb-compose = "1.7.1"
 
 microutils = "0.23.0"
 
+ksp = "2.0.21-1.0.25"
+kotlin-poet = "1.18.1"
+
 dokka = "1.9.20"
 
 dexcount = "4.0.0"
@@ -42,6 +45,15 @@ microutils-startup-plugin = { module = "dev.inmo:micro_utils.startup.plugin", ve
 microutils-startup-launcher = { module = "dev.inmo:micro_utils.startup.launcher", version.ref = "microutils" }
 microutils-koin = { module = "dev.inmo:micro_utils.koin", version.ref = "microutils" }
 microutils-koin-generator = { module = "dev.inmo:micro_utils.koin.generator", version.ref = "microutils" }
+microutils-ksp-classcasts = { module = "dev.inmo:micro_utils.ksp.classcasts", version.ref = "microutils" }
+microutils-ksp-classcasts-generator = { module = "dev.inmo:micro_utils.ksp.classcasts.generator", version.ref = "microutils" }
+microutils-ksp-sealed = { module = "dev.inmo:micro_utils.ksp.sealed", version.ref = "microutils" }
+microutils-ksp-sealed-generator = { module = "dev.inmo:micro_utils.ksp.sealed.generator", version.ref = "microutils" }
+
+# ksp dependencies
+
+kotlin-poet = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet" }
+ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 # buildscript classpaths
 
@@ -50,6 +62,7 @@ android-dexcount = { module = "com.getkeepsafe.dexcount:dexcount-gradle-plugin",
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-dokka-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+kotlin-ksp-plugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
 [plugins]
 

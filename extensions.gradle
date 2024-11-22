@@ -21,6 +21,36 @@ properties["internalProject"] = { name ->
     projectByName("$name")
 }
 
+def ksp_generators = new ArrayList()
+ksp_generators.add(libs.microutils.koin.generator)
+ksp_generators.add(libs.microutils.ksp.sealed.generator)
+ksp_generators.add(libs.microutils.ksp.classcasts.generator)
+properties["ksp_generators"] = ksp_generators
+
+def enableKspForTarget = { target, it ->
+    it.dependencies {
+        ksp_generators.forEach {
+            add(target, it)
+        }
+    }
+}
+
+properties["enableKspForCommon"] = {
+    enableKspForTarget("kspCommonMainMetadata", it)
+}
+
+properties["enableKspForJs"] = {
+    enableKspForTarget("kspJs", it)
+}
+
+properties["enableKspForJvm"] = {
+    enableKspForTarget("kspJvm", it)
+}
+
+properties["enableKspForAndroid"] = {
+    enableKspForTarget("kspAndroid", it)
+}
+
 allprojects {
     ext {
         releaseMode = (project.hasProperty('RELEASE_MODE') && project.property('RELEASE_MODE') == "true") || System.getenv('RELEASE_MODE') == "true"
