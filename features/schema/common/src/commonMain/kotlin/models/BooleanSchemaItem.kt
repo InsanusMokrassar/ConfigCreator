@@ -5,8 +5,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-data object BooleanSchemaItem: SchemaItem.Primitive, SchemaItem.Primitive.Type {
+data class BooleanSchemaItem(
+    val default: Boolean? = null
+): SchemaItem.Primitive {
     @Transient
-    override val typeInfo: BooleanSchemaItem
-        get() = this
+    override val typeInfo: Companion
+        get() = Companion
+
+    companion object : SchemaItem.Primitive.Type {
+        override fun createDefault(): SchemaItem = BooleanSchemaItem()
+    }
 }

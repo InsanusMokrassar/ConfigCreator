@@ -6,7 +6,7 @@ package dev.inmo.config_creator.features.schema.common.models
 import kotlin.collections.Set
 
 private val values: Set<SchemaItem.SchemaItemType> = setOf(ArraySchemaItem.Companion,
-    BooleanSchemaItem,
+    BooleanSchemaItem.Companion,
     MapSchemaItem.Companion,
     NumberSchemaItem.WithFloatingPoint.Companion,
     NumberSchemaItem.WithoutFloatingPoint.Companion,

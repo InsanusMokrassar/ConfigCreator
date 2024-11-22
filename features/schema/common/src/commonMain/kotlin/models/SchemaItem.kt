@@ -22,5 +22,7 @@ sealed interface SchemaItem {
 
     @Serializable
     @GenerateSealedWorkaround
-    sealed interface SchemaItemType
+    sealed interface SchemaItemType {
+        fun createDefault(): SchemaItem
+    }
 }

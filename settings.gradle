@@ -10,6 +10,8 @@ String[] includes = [
     ":features:schema:common",
     ":features:schema:client",
     ":features:schema:server",
+
+    ":features:schema_builder",
 ]
 
 

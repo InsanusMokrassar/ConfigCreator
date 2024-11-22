@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-sealed interface NumberSchemaItem<T : Any> : SchemaItem {
+sealed interface NumberSchemaItem<T : Any> : SchemaItem.Primitive {
     val min: T?
     val max: T?
     override val typeInfo: Type
@@ -21,8 +21,10 @@ sealed interface NumberSchemaItem<T : Any> : SchemaItem {
         @Transient
         override val typeInfo: Companion
             get() = Companion
-        companion object : Type
-}
+        companion object : Type {
+            override fun createDefault(): WithFloatingPoint = WithFloatingPoint()
+        }
+    }
 
     @Serializable
     @SerialName("long")
@@ -33,6 +35,8 @@ sealed interface NumberSchemaItem<T : Any> : SchemaItem {
         @Transient
         override val typeInfo: Companion
             get() = Companion
-        companion object : Type
+        companion object : Type {
+            override fun createDefault(): WithoutFloatingPoint = WithoutFloatingPoint()
+        }
     }
 }

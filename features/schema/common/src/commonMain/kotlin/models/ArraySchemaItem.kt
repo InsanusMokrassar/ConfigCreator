@@ -14,5 +14,11 @@ data class ArraySchemaItem(
     @Transient
     override val typeInfo: Companion
         get() = Companion
-    companion object : SchemaItem.Collection.Type
+    companion object : SchemaItem.Collection.Type {
+        override fun createDefault(): ArraySchemaItem = ArraySchemaItem(
+            itemsType = StringSchemaItem.createDefault(),
+            minItems = null,
+            maxItems = null
+        )
+    }
 }

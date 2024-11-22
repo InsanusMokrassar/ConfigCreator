@@ -16,5 +16,9 @@ data class StringSchemaItem(
     @Transient
     override val typeInfo: Companion
         get() = Companion
-    companion object : SchemaItem.Primitive.Type
+    companion object : SchemaItem.Primitive.Type {
+        override fun createDefault(): StringSchemaItem {
+            return StringSchemaItem()
+        }
+    }
 }

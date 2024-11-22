@@ -14,6 +14,7 @@ kotlin {
             dependencies {
                 api project(":config_creator.features.common.common")
                 api compose.runtime
+                api libs.navigation.mvvm
             }
         }
         jsMain {
