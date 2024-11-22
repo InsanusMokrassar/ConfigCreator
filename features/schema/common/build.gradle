@@ -12,7 +12,10 @@ kotlin {
         commonMain {
             dependencies {
                 api project(":config_creator.features.common.common")
+                api libs.microutils.ksp.sealed
             }
         }
     }
 }
+
+enableKspForCommon(this)
