@@ -5,15 +5,17 @@ import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.dom.Input
 
 @Composable
-actual fun StandardNumberInputDrawer(item: Number?, onChange: (Number?) -> Unit) {
-    Input(
-        InputType.Number
-    ) {
-        classes(SchemaDrawerStyleSheet.numberInput)
-        value(item ?.toString() ?: "")
-
-        onChange {
-            onChange(it.value)
-        }
-    }
+actual fun StandardNumberInputDrawer(
+    item: Number?,
+    label: String?,
+    placeholder: String?,
+    onChange: (Number?) -> Unit
+) {
+    StandardCommonTextInputDrawer(
+        item = item ?.toString() ?: "",
+        type = InputType.Number,
+        label = label,
+        placeholder = placeholder,
+        onChange = onChange
+    )
 }

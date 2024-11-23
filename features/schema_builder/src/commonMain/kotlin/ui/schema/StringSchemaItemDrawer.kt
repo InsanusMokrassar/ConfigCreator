@@ -10,20 +10,24 @@ fun StringSchemaItemDrawer(
 ) {
     StandardColumn {
         StandardNumberInputDrawer(
-            item.maxSymbols
-        ) {
-            onChange(
-                item.copy(
-                    maxSymbols = it ?.toInt()
-                )
-            )
-        }
-        StandardNumberInputDrawer(
-            item.minSymbols
+            item = item.minSymbols,
+            label = "Minimal symbols",
+            placeholder = "Empty means \"no minimal symbols restrictions\""
         ) {
             onChange(
                 item.copy(
                     minSymbols = it ?.toInt()
+                )
+            )
+        }
+        StandardNumberInputDrawer(
+            item = item.maxSymbols,
+            label = "Maximal symbols",
+            placeholder = "Empty means \"no maximal symbols restrictions\""
+        ) {
+            onChange(
+                item.copy(
+                    maxSymbols = it ?.toInt()
                 )
             )
         }

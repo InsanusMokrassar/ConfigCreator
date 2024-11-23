@@ -10,7 +10,11 @@ fun MapSchemaItemDrawer(
 ) {
     StandardColumn {
         item.items.forEach { subItem ->
-            StandardTextInputDrawer(subItem.key) { newKey ->
+            StandardTextInputDrawer(
+                item = subItem.key,
+                label = "Title",
+                placeholder = "Empty means absence of field"
+            ) { newKey ->
                 onChange(
                     item.copy(
                         items = item.items.toMutableMap().apply {

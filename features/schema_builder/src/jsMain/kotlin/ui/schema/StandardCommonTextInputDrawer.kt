@@ -3,30 +3,36 @@ package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 import androidx.compose.runtime.Composable
 import com.benasher44.uuid.uuid4
 import org.jetbrains.compose.web.attributes.InputType
+import org.jetbrains.compose.web.attributes.placeholder
 import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Label
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-actual fun StandardBooleanDrawer(item: Boolean, label: String?, onChange: (Boolean) -> Unit) {
+fun <T> StandardCommonTextInputDrawer(
+    item: String,
+    type: InputType<T>,
+    label: String?,
+    placeholder: String?,
+    onChange: (T) -> Unit
+) {
     val uniqueId = uuid4().toString().replace(regex = Regex(pattern = "[\\d-]"), replacement = "")
     StandardRow {
-        label ?.let {
+        label?.let {
             Label(uniqueId) {
                 Text(it)
             }
         }
         Input(
-            InputType.Checkbox
+            type
         ) {
-            id(uniqueId)
-            classes(SchemaDrawerStyleSheet.booleanInput)
-            value(item.toString())
             onChange {
-                onChange(
-                    it.value
-                )
+                onChange(it.value)
             }
+            placeholder?.let {
+                placeholder(it)
+            }
+            value(item)
         }
     }
 }

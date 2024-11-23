@@ -5,5 +5,7 @@ import androidx.compose.runtime.Composable
 @Composable
 expect fun StandardTextInputDrawer(
     item: String,
+    label: String?,
+    placeholder: String?,
     onChange: (String) -> Unit
 )

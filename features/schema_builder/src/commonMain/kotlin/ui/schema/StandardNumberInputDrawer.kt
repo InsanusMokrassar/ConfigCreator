@@ -5,5 +5,7 @@ import androidx.compose.runtime.Composable
 @Composable
 expect fun StandardNumberInputDrawer(
     item: Number?,
+    label: String?,
+    placeholder: String?,
     onChange: (Number?) -> Unit
 )

@@ -2,8 +2,6 @@ package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.schema.common.models.ArraySchemaItem
-import dev.inmo.config_creator.features.schema.common.models.BooleanSchemaItem
-import dev.inmo.config_creator.features.schema.common.models.StringSchemaItem
 
 @Composable
 fun ArraySchemaItemDrawer(
@@ -11,11 +9,22 @@ fun ArraySchemaItemDrawer(
     onChange: (ArraySchemaItem) -> Unit
 ) {
     StandardColumn {
-        SchemaItemDrawer(
-            item.itemsType
+        StandardNumberInputDrawer(
+            item.minItems,
+            "Min items",
+            "Empty means \"no min number\""
         ) {
             onChange(
-                item.copy(itemsType = it)
+                item.copy(minItems = it ?.toInt())
+            )
+        }
+        StandardNumberInputDrawer(
+            item.maxItems,
+            "Max items",
+            "Empty means \"no max number\""
+        ) {
+            onChange(
+                item.copy(maxItems = it ?.toInt())
             )
         }
         SchemaTypeDrawer(item.itemsType.typeInfo) {
@@ -25,18 +34,11 @@ fun ArraySchemaItemDrawer(
                 )
             )
         }
-        StandardNumberInputDrawer(
-            item.minItems
+        SchemaItemDrawer(
+            item.itemsType
         ) {
             onChange(
-                item.copy(minItems = it ?.toInt())
-            )
-        }
-        StandardNumberInputDrawer(
-            item.maxItems
-        ) {
-            onChange(
-                item.copy(maxItems = it ?.toInt())
+                item.copy(itemsType = it)
             )
         }
     }
