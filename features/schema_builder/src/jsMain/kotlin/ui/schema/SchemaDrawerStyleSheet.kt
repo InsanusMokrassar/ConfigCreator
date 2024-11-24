@@ -6,6 +6,8 @@ object SchemaDrawerStyleSheet : StyleSheet() {
     val rowContainer by style {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Row)
+        gap(8.px)
+        padding(8.px, 8.px, 0.px, 8.px)
     }
     val columnContainer by style {
         display(DisplayStyle.Flex)
