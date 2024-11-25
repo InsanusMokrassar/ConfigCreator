@@ -2,6 +2,7 @@ package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
 import com.benasher44.uuid.uuid4
+import dev.inmo.config_creator.features.schema_builder.client.ui.schema.stylesheet.InputStyleSheet
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.attributes.placeholder
 import org.jetbrains.compose.web.dom.Input
@@ -26,6 +27,7 @@ fun <T> StandardCommonTextInputDrawer(
         Input(
             type
         ) {
+            classes(InputStyleSheet.textInput)
             onChange {
                 onChange(it.value)
             }
