@@ -10,7 +10,7 @@ fun BooleanSchemaItemDrawer(
     onChange: (BooleanSchemaItem) -> Unit
 ) {
     val useDefault = item.default != null
-    StandardRow {
+    StandardColumnWithLeftPadding {
         StandardBooleanDrawer(
             useDefault
         ) {

@@ -10,20 +10,22 @@ fun ArraySchemaItemDrawer(
     item: ArraySchemaItem,
     onChange: (ArraySchemaItem) -> Unit
 ) {
-    StandardColumn {
-        SchemaItemDrawer(
-            item.itemsType
-        ) {
-            onChange(
-                item.copy(itemsType = it)
-            )
-        }
+    StandardColumnWithLeftPadding {
         SchemaTypeDrawer(item.itemsType.typeInfo) {
             onChange(
                 item.copy(
                     itemsType = it.createDefault()
                 )
             )
+        }
+        StandardColumnWithLeftPadding {
+            SchemaItemDrawer(
+                item.itemsType
+            ) {
+                onChange(
+                    item.copy(itemsType = it)
+                )
+            }
         }
         StandardNumberInputDrawer(
             item.minItems
