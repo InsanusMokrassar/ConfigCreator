@@ -8,7 +8,7 @@ fun NumberWithoutFloatingPointDrawer(
     item: NumberSchemaItem.WithoutFloatingPoint,
     onChange: (NumberSchemaItem.WithoutFloatingPoint) -> Unit
 ) {
-    StandardColumn {
+    StandardColumnWithLeftPadding {
         StandardNumberInputDrawer(
             item.min,
             "Minimal value",

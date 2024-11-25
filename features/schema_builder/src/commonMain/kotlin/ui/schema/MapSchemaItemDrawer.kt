@@ -8,7 +8,7 @@ fun MapSchemaItemDrawer(
     item: MapSchemaItem,
     onChange: (MapSchemaItem) -> Unit
 ) {
-    StandardColumn {
+    StandardColumnWithLeftPadding {
         item.items.forEach { subItem ->
             StandardTextInputDrawer(
                 item = subItem.key,
@@ -31,14 +31,16 @@ fun MapSchemaItemDrawer(
                     )
                 )
             }
-            SchemaItemDrawer(
-                subItem.value
-            ) {
-                onChange(
-                    item.copy(
-                        items = item.items + (subItem.key to it)
+            StandardColumnWithLeftPadding {
+                SchemaItemDrawer(
+                    subItem.value
+                ) {
+                    onChange(
+                        item.copy(
+                            items = item.items + (subItem.key to it)
+                        )
                     )
-                )
+                }
             }
         }
     }

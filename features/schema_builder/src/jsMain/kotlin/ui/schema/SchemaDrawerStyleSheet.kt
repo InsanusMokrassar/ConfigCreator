@@ -13,6 +13,10 @@ object SchemaDrawerStyleSheet : StyleSheet() {
     val columnContainer by style {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Column)
+        alignItems(AlignItems.Start)
+    }
+    val columnWithLeftPaddingContainer by style {
+        paddingLeft(8.px)
     }
     val itemContainer by style {
     }
