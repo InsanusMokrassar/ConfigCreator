@@ -12,7 +12,8 @@ fun BooleanSchemaItemDrawer(
     val useDefault = item.default != null
     StandardColumnWithLeftPadding {
         StandardBooleanDrawer(
-            useDefault
+            useDefault,
+            "Use default"
         ) {
             onChange(
                 item.copy(
@@ -23,7 +24,8 @@ fun BooleanSchemaItemDrawer(
         val defaultValue = item.default
         if (defaultValue != null) {
             StandardBooleanDrawer(
-                defaultValue
+                defaultValue,
+                "Default value"
             ) {
                 onChange(
                     item.copy(

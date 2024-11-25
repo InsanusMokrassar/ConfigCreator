@@ -28,14 +28,18 @@ fun ArraySchemaItemDrawer(
             }
         }
         StandardNumberInputDrawer(
-            item.minItems
+            item.minItems,
+            "Min items",
+            "Empty means \"no min number\""
         ) {
             onChange(
                 item.copy(minItems = it ?.toInt())
             )
         }
         StandardNumberInputDrawer(
-            item.maxItems
+            item.maxItems,
+            "Max items",
+            "Empty means \"no max number\""
         ) {
             onChange(
                 item.copy(maxItems = it ?.toInt())
