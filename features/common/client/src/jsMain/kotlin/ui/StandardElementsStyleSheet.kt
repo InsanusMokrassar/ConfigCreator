@@ -1,9 +1,8 @@
-package dev.inmo.config_creator.features.schema_builder.client.ui.schema
+package dev.inmo.config_creator.features.common.client.ui
 
-import dev.inmo.micro_utils.coroutines.compose.includeInStyleSheetsAggregator
 import org.jetbrains.compose.web.css.*
 
-object SchemaDrawerStyleSheet : StyleSheet() {
+object StandardElementsStyleSheet : StyleSheet() {
     val rowContainer by style {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Row)
@@ -32,9 +31,5 @@ object SchemaDrawerStyleSheet : StyleSheet() {
 
     val numberInput by style {
 
-    }
-
-    init {
-        includeInStyleSheetsAggregator()
     }
 }

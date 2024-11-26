@@ -2,6 +2,7 @@ package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import dev.inmo.config_creator.features.common.client.ui.*
 import dev.inmo.config_creator.features.schema.common.models.*
 import dev.inmo.micro_utils.common.withReplaced
 

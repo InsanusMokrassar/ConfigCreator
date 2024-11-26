@@ -1,8 +1,6 @@
 rootProject.name = 'config_creator'
 
 String[] includes = [
-    ":lib",
-
     ":features:common:common",
     ":features:common:client",
     ":features:common:server",

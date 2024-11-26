@@ -1,6 +1,8 @@
 package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
+import dev.inmo.config_creator.features.common.client.ui.StandardColumnWithLeftPadding
+import dev.inmo.config_creator.features.common.client.ui.StandardLongInputDrawer
 import dev.inmo.config_creator.features.schema.common.models.NumberSchemaItem
 
 @Composable
