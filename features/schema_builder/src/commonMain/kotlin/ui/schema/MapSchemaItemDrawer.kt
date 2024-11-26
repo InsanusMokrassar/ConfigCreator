@@ -11,22 +11,38 @@ fun MapSchemaItemDrawer(
     onChange: (MapSchemaItem) -> Unit
 ) {
     StandardColumnWithLeftPadding {
+        StandardButton("Add item") {
+            onChange(
+                item.copy(
+                    items = item.items + MapSchemaItem.Item("", StringSchemaItem(), false)
+                )
+            )
+        }
         item.items.forEach { subItem ->
             val (title, subItemItem, isRequired) = subItem
-            StandardTextInputDrawer(
-                item = title,
-                label = "Title",
-                placeholder = "Empty means absence of field"
-            ) { newKey ->
-                onChange(
-                    item.copy(
-                        items = item.items.withReplaced(subItem) {
-                            subItem.copy(
-                                fieldTitle = newKey
-                            )
-                        }
+            StandardRow {
+                StandardTextInputDrawer(
+                    item = title,
+                    label = "Title",
+                    placeholder = "Empty means absence of field"
+                ) { newKey ->
+                    onChange(
+                        item.copy(
+                            items = item.items.withReplaced(subItem) {
+                                subItem.copy(
+                                    fieldTitle = newKey
+                                )
+                            }
+                        )
                     )
-                )
+                }
+                StandardButton("Remove") {
+                    onChange(
+                        item.copy(
+                            items = item.items - subItem
+                        )
+                    )
+                }
             }
             StandardBooleanDrawer(
                 isRequired,
@@ -72,40 +88,6 @@ fun MapSchemaItemDrawer(
                     )
                 }
             }
-        }
-        DisposableEffect(item.items) {
-            val emptyItems = item.items.count { it.fieldTitle.isBlank() }
-            when {
-                emptyItems == 1 -> { /* do nothing */ }
-                emptyItems < 1 -> {
-                    onChange(
-                        item.copy(
-                            item.items + (
-                                MapSchemaItem.Item(
-                                    fieldTitle = "",
-                                    item = StringSchemaItem(),
-                                    isRequired = false
-                                )
-                            )
-                        )
-                    )
-                }
-                else -> {
-                    var removed = 0
-                    onChange(
-                        item.copy(
-                            item.items.filter {
-                                (removed >= emptyItems - 1 || it.fieldTitle.isNotBlank()).also {
-                                    if (!it) {
-                                        removed++
-                                    }
-                                }
-                            }
-                        )
-                    )
-                }
-            }
-            onDispose {  }
         }
     }
 }

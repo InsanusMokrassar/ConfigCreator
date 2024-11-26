@@ -40,6 +40,7 @@ microutils-coroutines = { module = "dev.inmo:micro_utils.coroutines", version.re
 microutils-coroutines-compose = { module = "dev.inmo:micro_utils.coroutines.compose", version.ref = "microutils" }
 microutils-fsm = { module = "dev.inmo:micro_utils.fsm.common", version.ref = "microutils" }
 microutils-fsm-repos = { module = "dev.inmo:micro_utils.fsm.repos.common", version.ref = "microutils" }
+microutils-mimetypes = { module = "dev.inmo:micro_utils.mime_types", version.ref = "microutils" }
 microutils-repos-inmemory = { module = "dev.inmo:micro_utils.repos.inmemory", version.ref = "microutils" }
 microutils-serialization-typed = { module = "dev.inmo:micro_utils.serialization.typed_serializer", version.ref = "microutils" }
 microutils-startup-plugin = { module = "dev.inmo:micro_utils.startup.plugin", version.ref = "microutils" }
