@@ -9,19 +9,19 @@ fun NumberWithFloatingPointDrawer(
     onChange: (NumberSchemaItem.WithFloatingPoint) -> Unit
 ) {
     StandardColumnWithLeftPadding {
-        StandardNumberInputDrawer(
+        StandardDoubleInputDrawer(
             item.min,
             "Minimal value",
             "Empty means \"no minimal value\""
         ) {
-            onChange(item.copy(min = it ?.toDouble()))
+            onChange(item.copy(min = it))
         }
-        StandardNumberInputDrawer(
+        StandardDoubleInputDrawer(
             item.max,
             "Maximal value",
             "Empty means \"no maximal value\""
         ) {
-            onChange(item.copy(max = it ?.toDouble()))
+            onChange(item.copy(max = it))
         }
     }
 }

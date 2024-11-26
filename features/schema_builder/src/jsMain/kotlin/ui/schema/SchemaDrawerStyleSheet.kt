@@ -20,6 +20,8 @@ object SchemaDrawerStyleSheet : StyleSheet() {
     }
     val itemContainer by style {
     }
+    val button by style {
+    }
     val booleanContainer by style {
         display(DisplayStyle.Inline)
     }

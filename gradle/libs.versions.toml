@@ -5,7 +5,7 @@ kotlin-serialization = "1.7.3"
 
 jb-compose = "1.7.1"
 
-microutils = "0.23.0"
+microutils = "0.23.1"
 navigation = "0.5.7"
 
 ksp = "2.0.21-1.0.26"

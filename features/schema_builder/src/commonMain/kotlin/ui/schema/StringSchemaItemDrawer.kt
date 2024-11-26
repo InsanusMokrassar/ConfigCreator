@@ -9,7 +9,7 @@ fun StringSchemaItemDrawer(
     onChange: (StringSchemaItem) -> Unit
 ) {
     StandardColumn {
-        StandardNumberInputDrawer(
+        StandardIntInputDrawer(
             item = item.minSymbols,
             label = "Minimal symbols",
             placeholder = "Empty means \"no minimal symbols restrictions\""
@@ -20,7 +20,7 @@ fun StringSchemaItemDrawer(
                 )
             )
         }
-        StandardNumberInputDrawer(
+        StandardIntInputDrawer(
             item = item.maxSymbols,
             label = "Maximal symbols",
             placeholder = "Empty means \"no maximal symbols restrictions\""

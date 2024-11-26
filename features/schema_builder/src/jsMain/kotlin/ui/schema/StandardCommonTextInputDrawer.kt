@@ -28,7 +28,7 @@ fun <T> StandardCommonTextInputDrawer(
             type
         ) {
             classes(InputStyleSheet.textInput)
-            onChange {
+            onInput {
                 onChange(it.value)
             }
             placeholder?.let {

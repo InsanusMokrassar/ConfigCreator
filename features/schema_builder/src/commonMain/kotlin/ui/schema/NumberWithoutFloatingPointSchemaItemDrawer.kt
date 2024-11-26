@@ -9,14 +9,14 @@ fun NumberWithoutFloatingPointDrawer(
     onChange: (NumberSchemaItem.WithoutFloatingPoint) -> Unit
 ) {
     StandardColumnWithLeftPadding {
-        StandardNumberInputDrawer(
+        StandardLongInputDrawer(
             item.min,
             "Minimal value",
             "Empty means \"no minimal value\""
         ) {
             onChange(item.copy(min = it ?.toLong()))
         }
-        StandardNumberInputDrawer(
+        StandardLongInputDrawer(
             item.max,
             "Maximal value",
             "Empty means \"no maximal value\""
