@@ -21,6 +21,15 @@ sealed interface NumberSchemaItem<T : Any> : SchemaItem.Primitive {
         @Transient
         override val typeInfo: Companion
             get() = Companion
+        
+        @Serializable
+        sealed interface Error : SchemaItem.Error {
+            data class ValueExceedsItsBounds(
+                val item: WithFloatingPoint,
+                val value: Double
+            ) : Error
+        }
+
         companion object : Type {
             override fun createDefault(): WithFloatingPoint = WithFloatingPoint()
         }
@@ -35,6 +44,15 @@ sealed interface NumberSchemaItem<T : Any> : SchemaItem.Primitive {
         @Transient
         override val typeInfo: Companion
             get() = Companion
+        
+        @Serializable
+        sealed interface Error : SchemaItem.Error {
+            data class ValueExceedsItsBounds(
+                val item: WithoutFloatingPoint,
+                val value: Long
+            ) : Error
+        }
+
         companion object : Type {
             override fun createDefault(): WithoutFloatingPoint = WithoutFloatingPoint()
         }

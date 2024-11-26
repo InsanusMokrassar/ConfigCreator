@@ -14,6 +14,22 @@ data class ArraySchemaItem(
     @Transient
     override val typeInfo: Companion
         get() = Companion
+
+    @Serializable
+    sealed interface Error : SchemaItem.Error {
+        @Serializable
+        data class SizeExceedsBounds(
+            val item: ArraySchemaItem,
+            val arraySize: Int
+        ) : Error
+        @Serializable
+        data class SubItemError(
+            val item: ArraySchemaItem,
+            val index: Int,
+            val error: SchemaItem.Error
+        ) : Error
+    }
+
     companion object : SchemaItem.Collection.Type {
         override fun createDefault(): ArraySchemaItem = ArraySchemaItem(
             itemsType = StringSchemaItem.createDefault(),
