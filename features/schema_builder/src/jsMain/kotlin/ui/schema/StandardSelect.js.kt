@@ -1,7 +1,9 @@
 package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
+import dev.inmo.config_creator.features.schema_builder.client.ui.schema.stylesheet.SelectStyleSheet
 import org.jetbrains.compose.web.attributes.selected
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Option
 import org.jetbrains.compose.web.dom.Select
 import org.jetbrains.compose.web.dom.Text
@@ -14,22 +16,30 @@ actual fun <T> StandardSelect(
     onSelect: (T) -> Unit
 ) {
     val titles = items.associateWith { titleCreator(it) }
-    Select({
-        onChange {
-            onSelect(items.elementAt(it.value ?.toIntOrNull() ?: return@onChange))
-        }
+    Div({
+        classes(SelectStyleSheet.rootContainerSelect)
     }) {
-        items.forEachIndexed { i, it ->
-            val title = titles.getValue(it)
-            Option(
-                i.toString(),
-                {
-                    if (it == selected) {
-                        selected()
+        Div({
+            classes(SelectStyleSheet.containerSelect)
+        }) {
+            Select({
+                onChange {
+                    onSelect(items.elementAt(it.value ?.toIntOrNull() ?: return@onChange))
+                }
+            }) {
+                items.forEachIndexed { i, it ->
+                    val title = titles.getValue(it)
+                    Option(
+                        i.toString(),
+                        {
+                            if (it == selected) {
+                                selected()
+                            }
+                        }
+                    ) {
+                        Text(title)
                     }
                 }
-            ) {
-                Text(title)
             }
         }
     }
