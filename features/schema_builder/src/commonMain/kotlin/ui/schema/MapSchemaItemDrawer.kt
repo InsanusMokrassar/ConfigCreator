@@ -74,18 +74,36 @@ fun MapSchemaItemDrawer(
             }
         }
         DisposableEffect(item.items) {
-            if (item.items.none { it.fieldTitle.isBlank() }) {
-                onChange(
-                    item.copy(
-                        item.items + (
+            val emptyItems = item.items.count { it.fieldTitle.isBlank() }
+            when {
+                emptyItems == 1 -> { /* do nothing */ }
+                emptyItems < 1 -> {
+                    onChange(
+                        item.copy(
+                            item.items + (
                                 MapSchemaItem.Item(
                                     fieldTitle = "",
                                     item = StringSchemaItem(),
                                     isRequired = false
                                 )
                             )
+                        )
                     )
-                )
+                }
+                else -> {
+                    var removed = 0
+                    onChange(
+                        item.copy(
+                            item.items.filter {
+                                (removed >= emptyItems - 1 || it.fieldTitle.isNotBlank()).also {
+                                    if (!it) {
+                                        removed++
+                                    }
+                                }
+                            }
+                        )
+                    )
+                }
             }
             onDispose {  }
         }
