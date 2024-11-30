@@ -1,29 +1,32 @@
 package dev.inmo.config_creator.features.json_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
-import dev.inmo.config_creator.features.common.client.ui.StandardColumnWithLeftPadding
-import dev.inmo.config_creator.features.common.client.ui.StandardLongInputDrawer
+import dev.inmo.config_creator.features.common.client.ui.*
 import dev.inmo.config_creator.features.schema.common.models.NumberSchemaItem
 
 @Composable
 fun NumberWithoutFloatingPointDrawer(
     item: NumberSchemaItem.WithoutFloatingPoint,
-    onChange: (NumberSchemaItem.WithoutFloatingPoint) -> Unit
+    value: Long,
+    onChange: (Long) -> Unit
 ) {
-    StandardColumnWithLeftPadding {
-        StandardLongInputDrawer(
-            item.min,
-            "Minimal value",
-            "Empty means \"no minimal value\""
-        ) {
-            onChange(item.copy(min = it ?.toLong()))
+    StandardColumn {
+        StandardRow {
+            item.min?.let {
+                StandardText("Min value: $it")
+            }
+            item.max?.let {
+                StandardText("Max value: $it")
+            }
         }
-        StandardLongInputDrawer(
-            item.max,
-            "Maximal value",
-            "Empty means \"no maximal value\""
-        ) {
-            onChange(item.copy(max = it ?.toLong()))
+        StandardLongInputDrawer(value, null, null,) {
+            val newValue = it ?: value
+            onChange(
+                newValue.coerceIn(
+                    item.min ?: Long.MIN_VALUE,
+                    item.max ?: Long.MAX_VALUE
+                )
+            )
         }
     }
 }

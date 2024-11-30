@@ -1,70 +1,53 @@
 package dev.inmo.config_creator.features.json_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import dev.inmo.config_creator.features.common.client.ui.*
+import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultNew
+import dev.inmo.config_creator.features.json_builder.client.utils.title
 import dev.inmo.config_creator.features.schema.common.models.*
 import dev.inmo.micro_utils.common.withReplaced
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonObject
 
 @Composable
 fun MapSchemaItemDrawer(
     item: MapSchemaItem,
-    json: JsonElement,
-    onChange: (MapSchemaItem) -> Unit
+    map: Map<String, Any?>,
+    onChange: (Map<String, Any?>) -> Unit
 ) {
     StandardColumnWithLeftPadding {
         item.items.forEach { subItem ->
-            val (title, subItemItem, isRequired) = subItem
+            val currentValue = map[subItem.fieldTitle]
             StandardRow {
-                StandardText(title + " $json")
-            }
-//            StandardRow {
-//                StandardTextInputDrawer(
-//                    item = title,
-//                    label = "Title",
-//                    placeholder = "Empty means absence of field"
-//                ) { newKey ->
-//                    onChange(
-//                        item.copy(
-//                            items = item.items.withReplaced(subItem) {
-//                                subItem.copy(
-//                                    fieldTitle = newKey
-//                                )
-//                            }
-//                        )
-//                    )
-//                }
-//            }
-            SchemaTypeDrawer(subItem.item.typeInfo) { newTypeInfo ->
-                onChange(
-                    item.copy(
-                        items = item.items.withReplaced(
-                            subItem
-                        ) {
-                            subItem.copy(
-                                item = newTypeInfo.createDefault()
-                            )
-                        }
+                StandardBooleanDrawer(
+                    currentValue != null || subItem.isRequired,
+                    null,
+                    disabled = subItem.isRequired
+                ) {
+                    val mutableMap = map.toMutableMap()
+                    mutableMap[subItem.fieldTitle] = when (it) {
+                        true -> subItem.item.createDefaultNew()
+                        false -> null
+                    }
+                    onChange(
+                        mutableMap.toMap()
                     )
-                )
+                }
+                StandardText("${subItem.fieldTitle}: ${subItem.item.typeInfo.title()}")
             }
             StandardColumnWithLeftPadding {
-                SchemaItemDrawer(
-                    subItemItem
-                ) { newItem ->
-                    onChange(
-                        item.copy(
-                            items = item.items.withReplaced(
-                                subItem
-                            ) {
-                                subItem.copy(
-                                    item = newItem
-                                )
-                            }
+                if (currentValue == null) {
+                    return@StandardColumnWithLeftPadding
+                } else {
+                    SchemaItemDrawer(
+                        subItem.item,
+                        currentValue,
+                    ) {
+                        val mutableMap = map.toMutableMap()
+                        mutableMap[subItem.fieldTitle] = it
+                        onChange(
+                            mutableMap.toMap()
                         )
-                    )
+                    }
                 }
             }
         }

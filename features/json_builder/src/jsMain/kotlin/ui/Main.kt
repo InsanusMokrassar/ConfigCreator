@@ -1,10 +1,13 @@
 package dev.inmo.config_creator.features.json_builder.client.ui
 
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import dev.inmo.config_creator.features.common.client.ui.StandardButton
 import dev.inmo.config_creator.features.common.client.ui.StandardElementsStyleSheet
 import dev.inmo.config_creator.features.common.client.ui.stylesheet.ResetStyles
 import dev.inmo.config_creator.features.json_builder.client.ui.schema.JsonDrawer
+import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultNew
 import dev.inmo.config_creator.features.schema.common.models.*
 import dev.inmo.micro_utils.common.*
 import dev.inmo.micro_utils.coroutines.compose.enableStyleSheetsAggregator
@@ -21,38 +24,43 @@ fun main() {
         val schemaState = remember { mutableStateOf<Schema?>(null) }
         val jsonState = remember {
             mutableStateOf(
-                when (val rootItem = schemaState.value ?.rootItem) {
-                    is ArraySchemaItem -> JsonArray(emptyList())
-                    null,
-                    is MapSchemaItem -> JsonObject(emptyMap())
-                    is BooleanSchemaItem -> JsonPrimitive(false)
-                    is NumberSchemaItem.WithFloatingPoint -> JsonPrimitive(rootItem.min ?: 0.0)
-                    is NumberSchemaItem.WithoutFloatingPoint -> JsonPrimitive(rootItem.min ?: 0.0)
-                    is StringSchemaItem -> JsonPrimitive("")
-                }
+                schemaState.value ?.rootItem ?.createDefaultNew()
             )
         }
-        JsonDrawer(
-            schemaState.value,
-            jsonState.value,
-            {
-//                val json = it.serializeToString()
-//                triggerDownloadFile(
-//                    filename = "schema.json",
-//                    fileLink = URL.createObjectURL(Blob(arrayOf(json)))
-//                )
-            },
-            {
-                selectFile({
-                    it.accept = KnownMimeTypes.Application.Json.raw
-                }) {
-                    it.readBytesPromise().then {
-                        schemaState.value = Schema.deserializeFromString(it.decodeToString())
-                    }
+        StandardButton("Load schema") {
+            selectFile({
+                it.accept = KnownMimeTypes.Application.Json.raw
+            }) {
+                it.readBytesPromise().then {
+                    val newSchema = Schema.deserializeFromString(it.decodeToString())
+                    schemaState.value = newSchema
+                    jsonState.value = newSchema.rootItem.createDefaultNew()
                 }
             }
-        ) {
-            jsonState.value = it
+        }
+        jsonState.value ?.let {
+            JsonDrawer(
+                schemaState.value,
+                it,
+                {
+                    val json = Json.encodeToString(JsonElement.serializer(), it)
+                    triggerDownloadFile(
+                        filename = "config.json",
+                        fileLink = URL.createObjectURL(Blob(arrayOf(json)))
+                    )
+                },
+                {
+                    selectFile({
+                        it.accept = KnownMimeTypes.Application.Json.raw
+                    }) {
+                        it.readBytesPromise().then {
+                            jsonState.value = Json.decodeFromString(JsonElement.serializer(), it.decodeToString())
+                        }
+                    }
+                }
+            ) {
+                jsonState.value = it
+            }
         }
     }
 }

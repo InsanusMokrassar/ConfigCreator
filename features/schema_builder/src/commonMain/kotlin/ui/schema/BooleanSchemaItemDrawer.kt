@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.common.client.ui.StandardBooleanDrawer
 import dev.inmo.config_creator.features.common.client.ui.StandardColumnWithLeftPadding
 import dev.inmo.config_creator.features.schema.common.models.BooleanSchemaItem
-import dev.inmo.config_creator.features.schema.common.models.StringSchemaItem
 
 @Composable
 fun BooleanSchemaItemDrawer(
@@ -15,7 +14,7 @@ fun BooleanSchemaItemDrawer(
     StandardColumnWithLeftPadding {
         StandardBooleanDrawer(
             useDefault,
-            "Use default"
+            "Use default",
         ) {
             onChange(
                 item.copy(
@@ -27,7 +26,7 @@ fun BooleanSchemaItemDrawer(
         if (defaultValue != null) {
             StandardBooleanDrawer(
                 defaultValue,
-                "Default value"
+                "Default value",
             ) {
                 onChange(
                     item.copy(

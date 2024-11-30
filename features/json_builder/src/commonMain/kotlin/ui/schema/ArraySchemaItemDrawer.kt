@@ -1,49 +1,70 @@
 package dev.inmo.config_creator.features.json_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
-import dev.inmo.config_creator.features.common.client.ui.StandardColumnWithLeftPadding
-import dev.inmo.config_creator.features.common.client.ui.StandardIntInputDrawer
+import androidx.compose.runtime.SideEffect
+import dev.inmo.config_creator.features.common.client.ui.*
+import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultNew
+import dev.inmo.config_creator.features.json_builder.client.utils.title
 import dev.inmo.config_creator.features.schema.common.models.ArraySchemaItem
+import dev.inmo.micro_utils.common.withReplaced
+import kotlin.math.max
 
 @Composable
 fun ArraySchemaItemDrawer(
     item: ArraySchemaItem,
-    onChange: (ArraySchemaItem) -> Unit
+    value: List<Any>,
+    onChange: (List<Any>) -> Unit
 ) {
-    StandardColumnWithLeftPadding {
-        SchemaTypeDrawer(item.itemsType.typeInfo) {
+    item.minItems ?.let { minItems ->
+        SideEffect {
             onChange(
-                item.copy(
-                    itemsType = it.createDefault()
-                )
+                value + (value.size .. minItems).map {
+                    item.itemsType.createDefaultNew()
+                }
             )
         }
-        StandardColumnWithLeftPadding {
-            SchemaItemDrawer(
-                item.itemsType
-            ) {
+    }
+    StandardColumnWithLeftPadding {
+        val minItems = item.minItems
+        val maxItems = item.maxItems
+        if (maxItems == null || value.size < maxItems) {
+            StandardButton("Add item") {
                 onChange(
-                    item.copy(itemsType = it)
+                    value + item.itemsType.createDefaultNew()
                 )
             }
         }
-        StandardIntInputDrawer(
-            item.minItems,
-            "Min items",
-            "Empty means \"no min number\""
-        ) {
-            onChange(
-                item.copy(minItems = it ?.toInt())
-            )
+        StandardRow {
+            StandardText("Items type: ${item.itemsType.typeInfo.title()}")
+            minItems ?.let {
+                StandardText("Min items: $it")
+            }
+            maxItems ?.let {
+                StandardText("Max items: $it")
+            }
         }
-        StandardIntInputDrawer(
-            item.maxItems,
-            "Max items",
-            "Empty means \"no max number\""
-        ) {
-            onChange(
-                item.copy(maxItems = it ?.toInt())
-            )
+        StandardColumnWithLeftPadding {
+            value.forEach { subValue ->
+                SchemaItemDrawer(
+                    item.itemsType,
+                    subValue
+                ) { newSubValue ->
+                    onChange(
+                        value.withReplaced(
+                            subValue
+                        ) { _ ->
+                            newSubValue
+                        }
+                    )
+                }
+                if (minItems == null || value.size > minItems) {
+                    StandardButton("Remove item") {
+                        onChange(
+                            value - subValue
+                        )
+                    }
+                }
+            }
         }
     }
 }
