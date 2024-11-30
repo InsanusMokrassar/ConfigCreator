@@ -21,7 +21,7 @@ import org.w3c.files.Blob
 fun main() {
     renderComposable("root") {
         enableStyleSheetsAggregator(setOf(SchemaDrawerStyleSheet))
-        val schemaState = remember { mutableStateOf<Schema>(Schema(MapSchemaItem(emptyList(), emptySet()))) }
+        val schemaState = remember { mutableStateOf<Schema>(Schema(MapSchemaItem(emptyList()))) }
         SchemaDrawer(
             schemaState.value,
             {
