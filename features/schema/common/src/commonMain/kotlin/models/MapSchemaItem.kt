@@ -8,7 +8,6 @@ import kotlinx.serialization.Transient
 @SerialName("object")
 data class MapSchemaItem(
     val items: List<Item>,
-    val requiredFields: Set<String>,
 ) : SchemaItem.Collection {
     @Transient
     override val typeInfo: Companion
@@ -21,10 +20,18 @@ data class MapSchemaItem(
         val isRequired: Boolean,
     )
 
+    @Serializable
+    sealed interface Error : SchemaItem.Error {
+        @Serializable
+        data class RequiredFieldAbsent(
+            val item: MapSchemaItem,
+            val subItem: Item,
+        ) : Error
+    }
+
     companion object : SchemaItem.Collection.Type {
         override fun createDefault(): SchemaItem = MapSchemaItem(
             items = emptyList(),
-            requiredFields = emptySet()
         )
     }
 }

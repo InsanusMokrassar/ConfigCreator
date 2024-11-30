@@ -6,5 +6,6 @@ import androidx.compose.runtime.Composable
 expect fun StandardBooleanDrawer(
     item: Boolean,
     label: String?,
+    disabled: Boolean = false,
     onChange: (Boolean) -> Unit
 )

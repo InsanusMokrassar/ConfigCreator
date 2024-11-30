@@ -2,7 +2,6 @@ package dev.inmo.config_creator.features.schema_builder.client.ui
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import dev.inmo.config_creator.features.common.client.ui.stylesheet.ResetStyles
 import dev.inmo.config_creator.features.schema.common.models.MapSchemaItem
 import dev.inmo.config_creator.features.schema.common.models.Schema
 import dev.inmo.config_creator.features.schema.common.models.StringSchemaItem
@@ -21,8 +20,8 @@ import org.w3c.files.Blob
 
 fun main() {
     renderComposable("root") {
-        enableStyleSheetsAggregator(setOf(SchemaDrawerStyleSheet, ResetStyles))
-        val schemaState = remember { mutableStateOf<Schema>(Schema(MapSchemaItem(emptyList(), emptySet()))) }
+        enableStyleSheetsAggregator(setOf(SchemaDrawerStyleSheet))
+        val schemaState = remember { mutableStateOf<Schema>(Schema(MapSchemaItem(emptyList()))) }
         SchemaDrawer(
             schemaState.value,
             {

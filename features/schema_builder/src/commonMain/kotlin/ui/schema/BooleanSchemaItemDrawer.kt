@@ -3,9 +3,7 @@ package dev.inmo.config_creator.features.schema_builder.client.ui.schema
 import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.common.client.ui.StandardBooleanDrawer
 import dev.inmo.config_creator.features.common.client.ui.StandardColumnWithLeftPadding
-import dev.inmo.config_creator.features.common.client.ui.StandardRow
 import dev.inmo.config_creator.features.schema.common.models.BooleanSchemaItem
-import dev.inmo.config_creator.features.schema.common.models.StringSchemaItem
 
 @Composable
 fun BooleanSchemaItemDrawer(
@@ -14,29 +12,27 @@ fun BooleanSchemaItemDrawer(
 ) {
     val useDefault = item.default != null
     StandardColumnWithLeftPadding {
-        StandardRow {
+        StandardBooleanDrawer(
+            useDefault,
+            "Use default",
+        ) {
+            onChange(
+                item.copy(
+                    default = if (it) false else null
+                )
+            )
+        }
+        val defaultValue = item.default
+        if (defaultValue != null) {
             StandardBooleanDrawer(
-                useDefault,
-                "Use default"
+                defaultValue,
+                "Default value",
             ) {
                 onChange(
                     item.copy(
-                        default = if (it) false else null
+                        default = it
                     )
                 )
-            }
-            val defaultValue = item.default
-            if (defaultValue != null) {
-                StandardBooleanDrawer(
-                    defaultValue,
-                    "Default value"
-                ) {
-                    onChange(
-                        item.copy(
-                            default = it
-                        )
-                    )
-                }
             }
         }
     }

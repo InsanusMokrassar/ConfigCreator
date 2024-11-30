@@ -16,6 +16,21 @@ data class StringSchemaItem(
     @Transient
     override val typeInfo: Companion
         get() = Companion
+
+    @Serializable
+    sealed interface Error : SchemaItem.Error {
+        @Serializable
+        data class RegexDoNotMatch(
+            val item: StringSchemaItem,
+            val value: String
+        ) : Error
+        @Serializable
+        data class StringLengthExceedsItsBounds(
+            val item: StringSchemaItem,
+            val value: String
+        ) : Error
+    }
+
     companion object : SchemaItem.Primitive.Type {
         override fun createDefault(): StringSchemaItem {
             return StringSchemaItem()
