@@ -14,6 +14,12 @@ object InputStyleSheet : StyleSheet() {
             property("-moz-appearance", "textfield")
         }
     }
+    val containerStandardInput by style {
+        display(DisplayStyle.Flex)
+        alignItems(AlignItems.Baseline)
+        paddingTop(8.px)
+        gap(8.px)
+    }
     val textInput by style {
         minWidth(256.px)
         padding(12.px)

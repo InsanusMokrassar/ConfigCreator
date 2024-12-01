@@ -12,9 +12,9 @@ object BooleanStyleSheet : StyleSheet() {
             style(LineStyle.Solid)
             color(Color.white)
         }
-        borderRadius(0.25.em)
+        borderRadius(0.25.cssRem)
         gap(8.px)
-        padding(8.px)
+        padding(4.px, 8.px)
     }
 
     init {

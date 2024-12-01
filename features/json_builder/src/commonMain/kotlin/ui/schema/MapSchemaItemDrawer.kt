@@ -20,7 +20,7 @@ fun MapSchemaItemDrawer(
             StandardRow {
                 StandardBooleanDrawer(
                     currentValue != null || subItem.isRequired,
-                    null,
+                    "Title: ${subItem.fieldTitle} Type: ${subItem.item.typeInfo.title()}",
                     disabled = subItem.isRequired
                 ) {
                     val mutableMap = map.toMutableMap()
@@ -32,7 +32,6 @@ fun MapSchemaItemDrawer(
                         mutableMap.toMap()
                     )
                 }
-                StandardText("${subItem.fieldTitle}: ${subItem.item.typeInfo.title()}")
             }
             StandardColumnWithLeftPadding {
                 if (currentValue == null) {

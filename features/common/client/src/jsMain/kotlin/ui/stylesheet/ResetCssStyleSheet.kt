@@ -12,6 +12,9 @@ object ResetStyles : StyleSheet() {
             fontStyle("normal")
             fontWeight(600)
         }
+        "p" style {
+            margin(0.px)
+        }
         includeInStyleSheetsAggregator()
     }
 }

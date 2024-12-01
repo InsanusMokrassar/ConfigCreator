@@ -19,73 +19,75 @@ fun MapSchemaItemDrawer(
             )
         }
         item.items.forEach { subItem ->
-            val (title, subItemItem, isRequired) = subItem
-            StandardRow {
-                StandardTextInputDrawer(
-                    item = title,
-                    label = "Title",
-                    placeholder = "Empty means absence of field"
-                ) { newKey ->
-                    onChange(
-                        item.copy(
-                            items = item.items.withReplaced(subItem) {
-                                subItem.copy(
-                                    fieldTitle = newKey
-                                )
-                            }
-                        )
-                    )
-                }
-                StandardButton("Remove") {
-                    onChange(
-                        item.copy(
-                            items = item.items - subItem
-                        )
-                    )
-                }
-            }
-            StandardBooleanDrawer(
-                isRequired,
-                "Required",
-            ) { newIsRequired ->
-                onChange(
-                    item.copy(
-                        items = item.items.withReplaced(subItem) {
-                            subItem.copy(
-                                isRequired = newIsRequired
+            StandardCard {
+                val (title, subItemItem, isRequired) = subItem
+                StandardRow {
+                    StandardTextInputDrawer(
+                        item = title,
+                        label = "Title",
+                        placeholder = "Empty means absence of field"
+                    ) { newKey ->
+                        onChange(
+                            item.copy(
+                                items = item.items.withReplaced(subItem) {
+                                    subItem.copy(
+                                        fieldTitle = newKey
+                                    )
+                                }
                             )
-                        }
-                    )
-                )
-            }
-            SchemaTypeDrawer(subItem.item.typeInfo) { newTypeInfo ->
-                onChange(
-                    item.copy(
-                        items = item.items.withReplaced(
-                            subItem
-                        ) {
-                            subItem.copy(
-                                item = newTypeInfo.createDefault()
+                        )
+                    }
+                    StandardBooleanDrawer(
+                        isRequired,
+                        "Required",
+                    ) { newIsRequired ->
+                        onChange(
+                            item.copy(
+                                items = item.items.withReplaced(subItem) {
+                                    subItem.copy(
+                                        isRequired = newIsRequired
+                                    )
+                                }
                             )
-                        }
-                    )
-                )
-            }
-            StandardColumnWithLeftPadding {
-                SchemaItemDrawer(
-                    subItemItem
-                ) { newItem ->
+                        )
+                    }
+                    StandardButton("Remove") {
+                        onChange(
+                            item.copy(
+                                items = item.items - subItem
+                            )
+                        )
+                    }
+                }
+                SchemaTypeDrawer(subItem.item.typeInfo) { newTypeInfo ->
                     onChange(
                         item.copy(
                             items = item.items.withReplaced(
                                 subItem
                             ) {
                                 subItem.copy(
-                                    item = newItem
+                                    item = newTypeInfo.createDefault()
                                 )
                             }
                         )
                     )
+                }
+                StandardColumnWithLeftPadding {
+                    SchemaItemDrawer(
+                        subItemItem
+                    ) { newItem ->
+                        onChange(
+                            item.copy(
+                                items = item.items.withReplaced(
+                                    subItem
+                                ) {
+                                    subItem.copy(
+                                        item = newItem
+                                    )
+                                }
+                            )
+                        )
+                    }
                 }
             }
         }

@@ -10,23 +10,25 @@ fun NumberWithoutFloatingPointDrawer(
     value: Long,
     onChange: (Long) -> Unit
 ) {
-    StandardColumn {
-        StandardRow {
-            item.min?.let {
-                StandardText("Min value: $it")
+    StandardCard {
+        StandardColumn {
+            StandardRow {
+                item.min?.let {
+                    StandardText("Min value: $it")
+                } ?: StandardText("Min value: 0")
+                item.max?.let {
+                    StandardText("Max value: $it")
+                } ?: StandardText("Max value: Max long")
             }
-            item.max?.let {
-                StandardText("Max value: $it")
-            }
-        }
-        StandardLongInputDrawer(value, null, null,) {
-            val newValue = it ?: value
-            onChange(
-                newValue.coerceIn(
-                    item.min ?: Long.MIN_VALUE,
-                    item.max ?: Long.MAX_VALUE
+            StandardLongInputDrawer(value, null, null,) {
+                val newValue = it ?: value
+                onChange(
+                    newValue.coerceIn(
+                        item.min ?: Long.MIN_VALUE,
+                        item.max ?: Long.MAX_VALUE
+                    )
                 )
-            )
+            }
         }
     }
 }

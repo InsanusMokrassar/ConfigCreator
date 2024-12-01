@@ -18,29 +18,27 @@ actual fun StandardBooleanDrawer(
     onChange: (Boolean) -> Unit
 ) {
     val uniqueId = uuid4().toString().replace(regex = Regex(pattern = "[\\d-]"), replacement = "")
-    StandardRow {
-        Div({
-            classes(BooleanStyleSheet.main)
-        }) {
-            label ?.let {
-                Label(uniqueId) {
-                    Text(it)
-                }
+    Div({
+        classes(BooleanStyleSheet.main)
+    }) {
+        label ?.let {
+            Label(uniqueId) {
+                Text(it)
             }
-            Input(
-                InputType.Checkbox
-            ) {
-                id(uniqueId)
-                classes(StandardElementsStyleSheet.booleanInput)
-                value(item.toString())
-                if (disabled) {
-                    disabled()
-                } else {
-                    onChange {
-                        onChange(
-                            it.value
-                        )
-                    }
+        }
+        Input(
+            InputType.Checkbox
+        ) {
+            id(uniqueId)
+            classes(StandardElementsStyleSheet.booleanInput)
+            value(item.toString())
+            if (disabled) {
+                disabled()
+            } else {
+                onChange {
+                    onChange(
+                        it.value
+                    )
                 }
             }
         }

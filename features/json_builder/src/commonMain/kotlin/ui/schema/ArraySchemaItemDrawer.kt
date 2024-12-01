@@ -24,43 +24,50 @@ fun ArraySchemaItemDrawer(
             )
         }
     }
+
     StandardColumnWithLeftPadding {
-        val minItems = item.minItems
-        val maxItems = item.maxItems
-        if (maxItems == null || value.size < maxItems) {
-            StandardButton("Add item") {
-                onChange(
-                    value + item.itemsType.createDefaultNew()
-                )
-            }
-        }
-        StandardRow {
-            StandardText("Items type: ${item.itemsType.typeInfo.title()}")
-            minItems ?.let {
-                StandardText("Min items: $it")
-            }
-            maxItems ?.let {
-                StandardText("Max items: $it")
-            }
-        }
-        StandardColumnWithLeftPadding {
-            value.forEach { subValue ->
-                SchemaItemDrawer(
-                    item.itemsType,
-                    subValue
-                ) { newSubValue ->
-                    onChange(
-                        value.withReplaced(
-                            subValue
-                        ) { _ ->
-                            newSubValue
-                        }
-                    )
+        StandardCard {
+            val minItems = item.minItems
+            val maxItems = item.maxItems
+            StandardRow {
+                StandardText("Items type: ${item.itemsType.typeInfo.title()}")
+                minItems?.let {
+                    StandardText("Min items: $it")
                 }
-                if (minItems == null || value.size > minItems) {
-                    StandardButton("Remove item") {
+                maxItems?.let {
+                    StandardText("Max items: $it")
+                }
+            }
+            StandardColumnWithLeftPadding {
+                value.forEach { subValue ->
+                    StandardRow {
+                        SchemaItemDrawer(
+                            item.itemsType,
+                            subValue
+                        ) { newSubValue ->
+                            onChange(
+                                value.withReplaced(
+                                    subValue
+                                ) { _ ->
+                                    newSubValue
+                                }
+                            )
+                        }
+                        if (minItems == null || value.size > minItems) {
+                            StandardButton("Remove item") {
+                                onChange(
+                                    value - subValue
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            if (maxItems == null || value.size < maxItems) {
+                StandardRow {
+                    StandardButton("Add item") {
                         onChange(
-                            value - subValue
+                            value + item.itemsType.createDefaultNew()
                         )
                     }
                 }

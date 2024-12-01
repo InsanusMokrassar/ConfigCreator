@@ -8,8 +8,10 @@ object StandardElementsStyleSheet : StyleSheet() {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Row)
         gap(8.px)
-        padding(8.px, 8.px, 8.px, 8.px)
-        alignItems(AlignItems.Center)
+        paddingTop(8.px)
+        paddingLeft(8.px)
+        paddingRight(8.px)
+        alignItems(AlignItems.Baseline)
     }
     val columnContainer by style {
         display(DisplayStyle.Flex)

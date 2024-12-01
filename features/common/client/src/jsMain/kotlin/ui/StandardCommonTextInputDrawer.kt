@@ -5,6 +5,7 @@ import com.benasher44.uuid.uuid4
 import dev.inmo.config_creator.features.common.client.ui.stylesheet.InputStyleSheet
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.attributes.placeholder
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Label
 import org.jetbrains.compose.web.dom.Text
@@ -18,7 +19,7 @@ fun <T> StandardCommonTextInputDrawer(
     onChange: (T) -> Unit
 ) {
     val uniqueId = uuid4().toString().replace(regex = Regex(pattern = "[\\d-]"), replacement = "")
-    StandardRow {
+    Div({ classes(InputStyleSheet.containerStandardInput) }) {
         label?.let {
             Label(uniqueId) {
                 Text(it)
