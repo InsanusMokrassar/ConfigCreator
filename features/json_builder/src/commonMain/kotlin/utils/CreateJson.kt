@@ -1,19 +1,18 @@
 package dev.inmo.config_creator.features.json_builder.client.utils
 
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.*
 
 fun Any.createJson(): JsonElement {
     return when (this) {
         is List<*> -> JsonArray(
             map { it!!.createJson() }
         )
-        is Map<*, *> -> (this as Map<String, Any>).let {
+        is Map<*, *> -> (this as Map<String, Any?>).let {
             JsonObject(
-                it.mapValues {
-                    it.value.createJson()
+                it.filterValues {
+                    it != null
+                }.mapValues {
+                    it.value ?.createJson() ?: JsonNull
                 }
             )
         }

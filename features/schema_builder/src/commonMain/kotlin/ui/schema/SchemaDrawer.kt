@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.common.client.ui.StandardButton
 import dev.inmo.config_creator.features.common.client.ui.StandardColumn
 import dev.inmo.config_creator.features.common.client.ui.StandardRow
+import dev.inmo.config_creator.features.schema.common.models.MapSchemaItem
 import dev.inmo.config_creator.features.schema.common.models.Schema
 
 @Composable
@@ -13,21 +14,27 @@ expect fun BeforeSchemaDrawer()
 fun SchemaDrawer(
     schema: Schema,
     onSaveSchema: ((Schema) -> Unit)? = null,
-    onOpenSchema: (() -> Unit)? = null,
+    onAddSchema: (() -> Unit)? = null,
     onSchemaChanged: (schema: Schema) -> Unit
 ) {
     BeforeSchemaDrawer()
 
-    if (onSaveSchema != null || onOpenSchema != null) {
+    if (onSaveSchema != null || onAddSchema != null) {
         StandardRow {
             onSaveSchema ?.let {
                 StandardButton("Save") {
                     it(schema)
                 }
             }
-            onOpenSchema ?.let {
+            onAddSchema ?.let {
                 StandardButton("Load") {
-                    onOpenSchema()
+                    onSchemaChanged(Schema(MapSchemaItem.createDefault()))
+                    onAddSchema()
+                }
+            }
+            onAddSchema ?.let {
+                StandardButton("Add") {
+                    onAddSchema()
                 }
             }
         }

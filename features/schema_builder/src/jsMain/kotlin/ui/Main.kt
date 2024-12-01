@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import dev.inmo.config_creator.features.common.client.ui.stylesheet.ResetStyles
 import dev.inmo.config_creator.features.schema.common.models.MapSchemaItem
 import dev.inmo.config_creator.features.schema.common.models.Schema
+import dev.inmo.config_creator.features.schema.common.models.plus
 import dev.inmo.config_creator.features.schema_builder.client.ui.schema.SchemaDrawer
 import dev.inmo.config_creator.features.schema_builder.client.ui.schema.SchemaDrawerStyleSheet
 import dev.inmo.micro_utils.common.*
@@ -19,20 +20,20 @@ fun main() {
         enableStyleSheetsAggregator(setOf(SchemaDrawerStyleSheet, ResetStyles))
         val schemaState = remember { mutableStateOf<Schema>(Schema(MapSchemaItem(emptyList()))) }
         SchemaDrawer(
-            schemaState.value,
-            {
+            schema = schemaState.value,
+            onSaveSchema = {
                 val json = it.serializeToString()
                 triggerDownloadFile(
                     filename = "schema.json",
                     fileLink = URL.createObjectURL(Blob(arrayOf(json)))
                 )
             },
-            {
+            onAddSchema = {
                 selectFile({
                     it.accept = KnownMimeTypes.Application.Json.raw
                 }) {
                     it.readBytesPromise().then {
-                        schemaState.value = Schema.deserializeFromString(it.decodeToString())
+                        schemaState.value += Schema.deserializeFromString(it.decodeToString())
                     }
                 }
             }

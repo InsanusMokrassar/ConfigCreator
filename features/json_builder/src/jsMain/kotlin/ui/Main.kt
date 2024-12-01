@@ -43,7 +43,7 @@ fun main() {
                 schemaState.value,
                 it,
                 {
-                    val json = Json.encodeToString(JsonElement.serializer(), it)
+                    val json = Json { prettyPrint = true }.encodeToString(JsonElement.serializer(), it)
                     triggerDownloadFile(
                         filename = "config.json",
                         fileLink = URL.createObjectURL(Blob(arrayOf(json)))

@@ -18,7 +18,7 @@ fun ArraySchemaItemDrawer(
     item.minItems ?.let { minItems ->
         SideEffect {
             onChange(
-                value + (value.size .. minItems).map {
+                value + (value.size until minItems).map {
                     item.itemsType.createDefaultNew()
                 }
             )
