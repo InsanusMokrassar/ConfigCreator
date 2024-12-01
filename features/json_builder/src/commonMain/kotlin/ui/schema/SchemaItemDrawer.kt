@@ -13,8 +13,8 @@ fun SchemaItemDrawer(
         is ArraySchemaItem -> ArraySchemaItemDrawer(item, value as List<Any>, onChange)
         is MapSchemaItem -> MapSchemaItemDrawer(item, value as Map<String, Any?>, onChange)
         is BooleanSchemaItem -> BooleanSchemaItemDrawer(item, value as Boolean, onChange)
-        is NumberSchemaItem.WithFloatingPoint -> NumberWithFloatingPointDrawer(item, value as Double, onChange)
-        is NumberSchemaItem.WithoutFloatingPoint -> NumberWithoutFloatingPointDrawer(item, value as Long, onChange)
+        is NumberSchemaItem.WithFloatingPoint -> NumberWithFloatingPointDrawer(item, (value as Number).toDouble(), onChange)
+        is NumberSchemaItem.WithoutFloatingPoint -> NumberWithoutFloatingPointDrawer(item, (value as Number).toLong(), onChange)
         is StringSchemaItem -> StringSchemaItemDrawer(item, value as String, onChange)
     }
 }

@@ -8,6 +8,7 @@ import dev.inmo.config_creator.features.common.client.ui.StandardElementsStyleSh
 import dev.inmo.config_creator.features.common.client.ui.stylesheet.ResetStyles
 import dev.inmo.config_creator.features.json_builder.client.ui.schema.JsonDrawer
 import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultNew
+import dev.inmo.config_creator.features.json_builder.client.utils.toStructureItem
 import dev.inmo.config_creator.features.schema.common.models.*
 import dev.inmo.micro_utils.common.*
 import dev.inmo.micro_utils.coroutines.compose.enableStyleSheetsAggregator
@@ -54,7 +55,7 @@ fun main() {
                         it.accept = KnownMimeTypes.Application.Json.raw
                     }) {
                         it.readBytesPromise().then {
-                            jsonState.value = Json.decodeFromString(JsonElement.serializer(), it.decodeToString())
+                            jsonState.value = Json.decodeFromString(JsonElement.serializer(), it.decodeToString()).toStructureItem()
                         }
                     }
                 }
