@@ -16,7 +16,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api project(":config_creator.features.schema.client")
+                api project(":config_creator.features.common.client")
+                api project(":config_creator.features.schema")
             }
         }
     }

@@ -3,11 +3,8 @@ rootProject.name = 'config_creator'
 String[] includes = [
     ":features:common:common",
     ":features:common:client",
-    ":features:common:server",
 
-    ":features:schema:common",
-    ":features:schema:client",
-    ":features:schema:server",
+    ":features:schema",
 
     ":features:schema_builder",
 
