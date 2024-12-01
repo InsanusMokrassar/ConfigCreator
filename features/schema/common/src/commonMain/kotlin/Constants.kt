@@ -1,1 +1,0 @@
-package dev.inmo.config_creator.features.schema.common
