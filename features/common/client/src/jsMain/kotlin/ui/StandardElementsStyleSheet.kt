@@ -15,11 +15,10 @@ object StandardElementsStyleSheet : StyleSheet() {
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Column)
         alignItems(AlignItems.Start)
+        padding(8.px, 8.px, 8.px, 8.px)
     }
     val columnWithLeftPaddingContainer by style {
-        paddingLeft(8.px)
-        paddingTop(8.px)
-        paddingBottom(8.px)
+        paddingLeft(24.px)
     }
     val itemContainer by style {
     }
