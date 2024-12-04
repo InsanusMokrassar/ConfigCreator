@@ -7,7 +7,6 @@ import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultN
 import dev.inmo.config_creator.features.json_builder.client.utils.title
 import dev.inmo.config_creator.features.schema.common.models.ArraySchemaItem
 import dev.inmo.micro_utils.common.withReplaced
-import kotlin.math.max
 
 @Composable
 fun ArraySchemaItemDrawer(
@@ -25,8 +24,8 @@ fun ArraySchemaItemDrawer(
         }
     }
 
-    StandardColumnWithLeftPadding {
-        StandardCard {
+    StandardBorder {
+        StandardColumnWithLeftPadding {
             val minItems = item.minItems
             val maxItems = item.maxItems
             StandardRow {

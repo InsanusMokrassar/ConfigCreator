@@ -10,16 +10,16 @@ fun MapSchemaItemDrawer(
     item: MapSchemaItem,
     onChange: (MapSchemaItem) -> Unit
 ) {
-    StandardColumnWithLeftPadding {
-        StandardButton("Add item") {
-            onChange(
-                item.copy(
-                    items = item.items + MapSchemaItem.Item("", StringSchemaItem(), false)
+    StandardBorder {
+        StandardColumnWithLeftPadding {
+            StandardButton("Add item") {
+                onChange(
+                    item.copy(
+                        items = item.items + MapSchemaItem.Item("", StringSchemaItem(), false)
+                    )
                 )
-            )
-        }
-        item.items.forEach { subItem ->
-            StandardCard {
+            }
+            item.items.forEach { subItem ->
                 val (title, subItemItem, isRequired) = subItem
                 StandardRow {
                     StandardTextInputDrawer(

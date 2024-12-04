@@ -14,38 +14,40 @@ fun MapSchemaItemDrawer(
     map: Map<String, Any?>,
     onChange: (Map<String, Any?>) -> Unit
 ) {
-    StandardColumnWithLeftPadding {
-        item.items.forEach { subItem ->
-            val currentValue = map[subItem.fieldTitle]
-            StandardRow {
-                StandardBooleanDrawer(
-                    currentValue != null || subItem.isRequired,
-                    "Title: ${subItem.fieldTitle} Type: ${subItem.item.typeInfo.title()}",
-                    disabled = subItem.isRequired
-                ) {
-                    val mutableMap = map.toMutableMap()
-                    mutableMap[subItem.fieldTitle] = when (it) {
-                        true -> subItem.item.createDefaultNew()
-                        false -> null
-                    }
-                    onChange(
-                        mutableMap.toMap()
-                    )
-                }
-            }
-            StandardColumnWithLeftPadding {
-                if (currentValue == null) {
-                    return@StandardColumnWithLeftPadding
-                } else {
-                    SchemaItemDrawer(
-                        subItem.item,
-                        currentValue,
+    StandardBorder {
+        StandardColumnWithLeftPadding {
+            item.items.forEach { subItem ->
+                val currentValue = map[subItem.fieldTitle]
+                StandardRow {
+                    StandardBooleanDrawer(
+                        currentValue != null || subItem.isRequired,
+                        "Title: ${subItem.fieldTitle} Type: ${subItem.item.typeInfo.title()}",
+                        disabled = subItem.isRequired
                     ) {
                         val mutableMap = map.toMutableMap()
-                        mutableMap[subItem.fieldTitle] = it
+                        mutableMap[subItem.fieldTitle] = when (it) {
+                            true -> subItem.item.createDefaultNew()
+                            false -> null
+                        }
                         onChange(
                             mutableMap.toMap()
                         )
+                    }
+                }
+                StandardColumnWithLeftPadding {
+                    if (currentValue == null) {
+                        return@StandardColumnWithLeftPadding
+                    } else {
+                        SchemaItemDrawer(
+                            subItem.item,
+                            currentValue,
+                        ) {
+                            val mutableMap = map.toMutableMap()
+                            mutableMap[subItem.fieldTitle] = it
+                            onChange(
+                                mutableMap.toMap()
+                            )
+                        }
                     }
                 }
             }
