@@ -10,16 +10,21 @@ fun StringSchemaItemDrawer(
     value: String,
     onChange: (String) -> Unit
 ) {
-    val placeholder = (item.minSymbols ?.let {
-        "Min symbols: $it"
-    } ?: "Min symbols: 0") + " " + (item.maxSymbols ?.let {
-        "Max symbols: $it"
-    } ?: "Max symbols: Unlimited")
-    StandardTextInputDrawer(
-        value,
-        null,
-        placeholder
-    ) {
-        onChange(it)
+    StandardColumn {
+        StandardRow {
+            item.minSymbols?.let {
+                StandardText("Min symbols: $it")
+            }
+            item.maxSymbols?.let {
+                StandardText("Max symbols: $it")
+            }
+        }
+        StandardTextInputDrawer(
+            value,
+            null,
+            null
+        ) {
+            onChange(it)
+        }
     }
 }

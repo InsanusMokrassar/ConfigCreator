@@ -11,14 +11,6 @@ fun NumberWithFloatingPointDrawer(
     onChange: (Double) -> Unit
 ) {
     StandardColumn {
-        StandardRow {
-            item.min ?.let {
-                StandardText("Min value: $it")
-            } ?: StandardText("Min value: 0.0")
-            item.max ?.let {
-                StandardText("Max value: $it")
-            } ?: StandardText("Max value: Max Double")
-        }
         StandardDoubleInputDrawer(value, null, null, ) {
             val newValue = it ?: value
             onChange(
@@ -27,6 +19,14 @@ fun NumberWithFloatingPointDrawer(
                     item.max ?: Double.MAX_VALUE
                 )
             )
+        }
+        StandardRow {
+            item.min ?.let {
+                StandardText("Min value: $it")
+            }
+            item.max ?.let {
+                StandardText("Max value: $it")
+            }
         }
     }
 }
