@@ -29,11 +29,11 @@ fun ArraySchemaItemDrawer(
             val minItems = item.minItems
             val maxItems = item.maxItems
             StandardRow {
-                StandardText("Items type: ${item.itemsType.typeInfo.title()}")
-                minItems?.let {
+                StandardText("Type: ${item.typeInfo.title()}")
+                minItems ?.let {
                     StandardText("Min items: $it")
                 }
-                maxItems?.let {
+                maxItems ?.let {
                     StandardText("Max items: $it")
                 }
             }

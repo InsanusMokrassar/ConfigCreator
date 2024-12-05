@@ -2,6 +2,7 @@ package dev.inmo.config_creator.features.json_builder.client.ui.schema
 
 import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.common.client.ui.*
+import dev.inmo.config_creator.features.json_builder.client.utils.title
 import dev.inmo.config_creator.features.schema.common.models.NumberSchemaItem
 
 @Composable
@@ -10,23 +11,26 @@ fun NumberWithoutFloatingPointDrawer(
     value: Long,
     onChange: (Long) -> Unit
 ) {
-    StandardColumn {
-        StandardLongInputDrawer(value, null, null,) {
-            val newValue = it ?: value
-            onChange(
-                newValue.coerceIn(
-                    item.min ?: Long.MIN_VALUE,
-                    item.max ?: Long.MAX_VALUE
+    StandardRow {
+        StandardText("${item.typeInfo.title()}:")
+        StandardColumn {
+            StandardLongInputDrawer(value, null, null,) {
+                val newValue = it ?: value
+                onChange(
+                    newValue.coerceIn(
+                        item.min ?: Long.MIN_VALUE,
+                        item.max ?: Long.MAX_VALUE
+                    )
                 )
-            )
-        }
-        StandardRow {
-            item.min?.let {
-                StandardText("Min value: $it")
             }
-            item.max?.let {
-                StandardText("Max value: $it")
-            }
+            StandardRow {
+                item.min ?.let {
+                    StandardText("Min value: $it")
+                }
+                item.max ?.let {
+                    StandardText("Max value: $it")
+                }
+            }.takeIf { item.min != null || item.max != null }
         }
     }
 }

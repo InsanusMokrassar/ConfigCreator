@@ -17,11 +17,10 @@ object InputStyleSheet : StyleSheet() {
     val containerStandardInput by style {
         display(DisplayStyle.Flex)
         alignItems(AlignItems.Baseline)
-        paddingTop(8.px)
         gap(8.px)
     }
     val textInput by style {
-        minWidth(256.px)
+        minWidth(300.px)
         padding(12.px)
         fontSize(1.15.em)
         outline("none")

@@ -8,7 +8,6 @@ object BooleanStyleSheet : StyleSheet() {
         display(DisplayStyle.Flex)
         alignItems(AlignItems.Center)
         gap(8.px)
-        padding(4.px, 8.px)
     }
 
     init {

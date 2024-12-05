@@ -21,7 +21,7 @@ fun MapSchemaItemDrawer(
                 StandardRow {
                     StandardBooleanDrawer(
                         currentValue != null || subItem.isRequired,
-                        "Title: ${subItem.fieldTitle} Type: ${subItem.item.typeInfo.title()}",
+                        "Title: ${subItem.fieldTitle}",
                         disabled = subItem.isRequired
                     ) {
                         val mutableMap = map.toMutableMap()
