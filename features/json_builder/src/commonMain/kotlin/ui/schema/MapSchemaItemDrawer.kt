@@ -3,10 +3,7 @@ package dev.inmo.config_creator.features.json_builder.client.ui.schema
 import androidx.compose.runtime.Composable
 import dev.inmo.config_creator.features.common.client.ui.*
 import dev.inmo.config_creator.features.json_builder.client.utils.createDefaultNew
-import dev.inmo.config_creator.features.json_builder.client.utils.title
 import dev.inmo.config_creator.features.schema.common.models.*
-import dev.inmo.micro_utils.common.withReplaced
-import kotlinx.serialization.json.JsonElement
 
 @Composable
 fun MapSchemaItemDrawer(
