@@ -35,9 +35,11 @@ object StandardElementsStyleSheet : StyleSheet() {
         borderRadius(0.25.cssRem)
         backgroundColor(rgba(225, 255, 255, 1))
         this.self + hover style {
+            cursor("pointer")
             backgroundColor(rgba(240, 255, 255, 1))
         }
         this.self + active style {
+            cursor("pointer")
             backgroundColor(rgba(225, 255, 255, 0.8))
         }
     }
