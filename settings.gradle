@@ -9,6 +9,8 @@ String[] includes = [
     ":features:schema_builder",
 
     ":features:json_builder",
+
+    ":features:builders",
 ]
 
 
