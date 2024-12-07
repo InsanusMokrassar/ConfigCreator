@@ -11,6 +11,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+      - name: Add Xmx params
+        run: echo "org.gradle.jvmargs=-Xmx512m -XX:MaxMetaspaceSize=512m" >> gradle.properties
       - name: Build with Gradle
         run: ./gradlew build
       - name: Publish Builder
