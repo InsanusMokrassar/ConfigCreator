@@ -30,6 +30,11 @@ publishing {
 
             licenses {
                 
+                    license {
+                        name = "MIT License"
+                        url = "https://opensource.org/licenses/MIT"
+                    }
+                
             }
         }
         repositories {
