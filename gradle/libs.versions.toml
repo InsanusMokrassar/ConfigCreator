@@ -13,6 +13,8 @@ kotlin-poet = "1.18.1"
 
 dokka = "1.9.20"
 
+gh-release = "2.5.2"
+
 dexcount = "4.0.0"
 junit_version = "4.12"
 test_ext_junit_version = "1.2.1"
@@ -67,6 +69,8 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-dokka-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 kotlin-ksp-plugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
+
+buildscript-gh-release = { module = "com.github.breadmoirai:github-release", version.ref = "gh-release" }
 
 [plugins]
 
