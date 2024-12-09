@@ -9,7 +9,7 @@ microutils = "0.23.2"
 navigation = "0.5.7"
 
 ksp = "2.1.0-1.0.29"
-kotlin-poet = "1.18.1"
+kotlin-poet = "2.0.0"
 
 dokka = "1.9.20"
 
