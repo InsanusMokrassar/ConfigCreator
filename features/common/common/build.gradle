@@ -11,6 +11,9 @@ kotlin {
         commonMain {
             dependencies {
                 api libs.microutils.startup.plugin
+                api libs.microutils.common
+                api libs.microutils.coroutines
+                api libs.microutils.mimetypes
             }
         }
     }

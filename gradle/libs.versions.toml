@@ -1,14 +1,14 @@
 [versions]
 
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 kotlin-serialization = "1.7.3"
 
 jb-compose = "1.7.1"
 
-microutils = "0.23.0"
+microutils = "0.23.2"
 navigation = "0.5.7"
 
-ksp = "2.0.21-1.0.26"
+ksp = "2.1.0-1.0.29"
 kotlin-poet = "1.18.1"
 
 dokka = "1.9.20"
@@ -40,6 +40,7 @@ microutils-coroutines = { module = "dev.inmo:micro_utils.coroutines", version.re
 microutils-coroutines-compose = { module = "dev.inmo:micro_utils.coroutines.compose", version.ref = "microutils" }
 microutils-fsm = { module = "dev.inmo:micro_utils.fsm.common", version.ref = "microutils" }
 microutils-fsm-repos = { module = "dev.inmo:micro_utils.fsm.repos.common", version.ref = "microutils" }
+microutils-mimetypes = { module = "dev.inmo:micro_utils.mime_types", version.ref = "microutils" }
 microutils-repos-inmemory = { module = "dev.inmo:micro_utils.repos.inmemory", version.ref = "microutils" }
 microutils-serialization-typed = { module = "dev.inmo:micro_utils.serialization.typed_serializer", version.ref = "microutils" }
 microutils-startup-plugin = { module = "dev.inmo:micro_utils.startup.plugin", version.ref = "microutils" }

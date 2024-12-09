@@ -5,5 +5,4 @@ import org.jetbrains.compose.web.css.Style
 
 @Composable
 actual fun BeforeSchemaDrawer() {
-    Style(SchemaDrawerStyleSheet)
 }
