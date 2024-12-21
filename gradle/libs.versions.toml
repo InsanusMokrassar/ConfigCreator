@@ -3,7 +3,7 @@
 kotlin = "2.1.0"
 kotlin-serialization = "1.7.3"
 
-jb-compose = "1.7.1"
+jb-compose = "1.7.3"
 
 microutils = "0.23.2"
 navigation = "0.5.7"
